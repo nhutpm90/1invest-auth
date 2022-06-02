@@ -1,0 +1,67 @@
+spring:
+  profiles:
+    active: dev
+
+---
+
+domain:
+  name: localhost
+  
+spring:
+  config:
+    activate:
+      on-profile: dev
+  application:
+    name: 1invest-auth
+  cloud: 
+    config: 
+      uri: http://${domain.name}:8888
+      
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka/}
+  instance:
+    preferIpAddress: true
+    
+---
+
+domain:
+  name: alpha.myapp.vn
+  
+spring:
+  config:
+    activate:
+      on-profile: test
+  application:
+    name: 1invest-auth
+  cloud: 
+    config: 
+      uri: http://localhost:8888
+#      uri: http://${domain.name}:8888
+      
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka/}
+
+---
+
+domain:
+  name: myapp.vn
+  
+spring:
+  config:
+    activate:
+      on-profile: prod
+  application:
+    name: 1invest-auth
+  cloud: 
+    config: 
+      uri: http://localhost:8888
+#      uri: http://${domain.name}:8888
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka/}
